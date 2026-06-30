@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOTOR DIARIO — El pulso del asfalto</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Semi+Condensed:wght@500;600&display=swap');
+
+    :root {
+      --rojo: #E8001D;
+      --negro: #0A0A0A;
+      --asfalto: #1C1C1E;
+      --plomo: #2C2C2E;
+      --gris: #6E6E73;
+      --gris-claro: #AEAEB2;
+      --titanio: #F5F5F7;
+      --blanco: #FFFFFF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--negro);
+      color: var(--titanio);
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─────────────────────────────────── */
+    header {
+      background: var(--negro);
+      border-bottom: 1px solid var(--plomo);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .top-bar {
+      background: var(--rojo);
+      padding: 6px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .top-bar a { color: inherit; text-decoration: none; }
+    .top-bar a:hover { color: #fff; }
+
+    .top-bar-links { display: flex; gap: 24px; }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      height: 64px;
+      gap: 40px;
+    }
+
+    .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+      color: var(--blanco);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .logo span { color: var(--rojo); }
+
+    .logo-dash {
+      width: 4px;
+      height: 28px;
+      background: var(--rojo);
+      display: inline-block;
+      margin-right: 2px;
+    }
+
+    nav { display: flex; gap: 4px; flex: 1; }
+
+    nav a {
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gris-claro);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    nav a:hover { color: var(--blanco); background: var(--plomo); }
+    nav a.active { color: var(--rojo); }
+
+    .nav-search {
+      width: 36px; height: 36px;
+      background: var(--plomo);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gris-claro);
+      transition: background 0.15s;
+    }
+    .nav-search:hover { background: #3a3a3c; color: var(--blanco); }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(to right, rgba(10,10,10,0.95) 38%, rgba(10,10,10,0.3) 70%, transparent 100%),
+        linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 50%),
+        url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1400&q=80') center/cover no-repeat;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 40px 48px;
+      max-width: 700px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--rojo);
+      color: var(--blanco);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--blanco);
+      border-radius: 50%;
+      animation: pulso 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulso {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      color: var(--blanco);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--rojo);
+      -webkit-text-stroke: 0px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(245,245,247,0.8);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 520px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--gris-claro);
+      font-family: 'Barlow Semi Condensed', sans-serif;
+    }
+
+    .hero-autor { display: flex; align-items: center; gap: 8px; }
+    .hero-autor-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--rojo), #ff4d6d);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: white;
+    }
+
+    .hero-sep { width: 1px; height: 14px; background: var(--plomo); }
+
+    .hero-minilectura {
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .hero-side {
+      position: absolute;
+      right: 40px;
+      bottom: 48px;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      z-index: 2;
+    }
+
+    .hero-side-titulo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      padding: 10px 0 6px;
+      border-top: 2px solid var(--rojo);
+      margin-bottom: 0;
+    }
+
+    .hero-side-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .hero-side-item:hover { opacity: 0.75; }
+
+    .hero-side-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--plomo);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 28px;
+    }
+
+    .hero-side-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--titanio);
+    }
+
+    .hero-side-cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-top: 2px;
+    }
+
+    /* ─── TICKER ─────────────────────────────────── */
+    .ticker {
+      background: var(--asfalto);
+      border-top: 2px solid var(--rojo);
+      border-bottom: 1px solid var(--plomo);
+      display: flex;
+      overflow: hidden;
+      height: 36px;
+    }
+
+    .ticker-label {
+      background: var(--rojo);
+      padding: 0 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blanco);
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .ticker-track {
+      display: flex;
+      animation: ticker 40s linear infinite;
+      align-items: center;
+    }
+
+    .ticker-track:hover { animation-play-state: paused; }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      white-space: nowrap;
+      padding: 0 32px;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gris-claro);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ticker-item::before {
+      content: '●';
+      color: var(--rojo);
+      font-size: 6px;
+    }
+
+    /* ─── MAIN CONTENT ───────────────────────────── */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ─── SECCIÓN PORTADA ────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 40px 0 20px;
+      border-bottom: 2px solid var(--rojo);
+      margin-bottom: 32px;
+    }
+
+    .section-header h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rojo);
+    }
+
+    .section-header-line {
+      flex: 1;
+      height: 1px;
+      background: var(--plomo);
+    }
+
+    .section-header a {
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gris);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .section-header a:hover { color: var(--rojo); }
+
+    /* ─── GRID NOTICIAS ──────────────────────────── */
+    .grid-noticias {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 2px;
+      background: var(--plomo);
+      margin-bottom: 2px;
+    }
+
+    .noticia-card {
+      background: var(--asfalto);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+    }
+
+    .noticia-card:hover { z-index: 2; }
+    .noticia-card:hover .noticia-img { transform: scale(1.04); }
+    .noticia-card:hover .noticia-titulo { color: var(--rojo); }
+
+    .noticia-card.grande {
+      grid-row: 1 / 3;
+    }
+
+    .noticia-img-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .noticia-card.grande .noticia-img-wrap { height: 380px; }
+    .noticia-card:not(.grande) .noticia-img-wrap { height: 170px; }
+
+    .noticia-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .noticia-cat {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--rojo);
+      color: var(--blanco);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+    }
+
+    .noticia-body {
+      padding: 16px;
+    }
+
+    .noticia-card.grande .noticia-body { padding: 20px; }
+
+    .noticia-titulo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--blanco);
+      line-height: 1.15;
+      transition: color 0.2s;
+      margin-bottom: 8px;
+    }
+
+    .noticia-card.grande .noticia-titulo { font-size: 26px; }
+    .noticia-card:not(.grande) .noticia-titulo { font-size: 16px; }
+
+    .noticia-excerpt {
+      font-size: 13px;
+      color: var(--gris-claro);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .noticia-card.grande .noticia-excerpt { display: block; -webkit-line-clamp: unset; font-size: 14px; }
+
+    .noticia-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-size: 11px;
+      color: var(--gris);
+    }
+
+    .noticia-footer .autor { color: var(--gris-claro); font-weight: 600; }
+    .noticia-footer .sep { width: 1px; height: 10px; background: var(--plomo); }
+
+    /* ─── SEGUNDA FILA: COLUMNAS ─────────────────── */
+    .dos-columnas {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 40px;
+      margin-top: 48px;
+    }
+
+    /* ─── LISTA NOTICIAS ─────────────────────────── */
+    .lista-noticias { display: flex; flex-direction: column; gap: 0; }
+
+    .lista-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--plomo);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .lista-item:first-child { border-top: none; }
+    .lista-item:hover { opacity: 0.75; }
+    .lista-item:hover .lista-titulo { color: var(--rojo); }
+
+    .lista-img-wrap {
+      height: 80px;
+      overflow: hidden;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .lista-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .lista-item:hover .lista-img { transform: scale(1.08); }
+
+    .lista-cat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 4px;
+    }
+
+    .lista-titulo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.2;
+      color: var(--blanco);
+      transition: color 0.2s;
+      margin-bottom: 6px;
+    }
+
+    .lista-meta {
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-size: 11px;
+      color: var(--gris);
+      display: flex;
+      gap: 10px;
+    }
+
+    /* ─── SIDEBAR ────────────────────────────────── */
+    .sidebar { display: flex; flex-direction: column; gap: 32px; }
+
+    /* Ranking */
+    .sidebar-widget {
+      border-top: 2px solid var(--rojo);
+      padding-top: 16px;
+    }
+
+    .widget-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 16px;
+    }
+
+    .ranking-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--plomo);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .ranking-item:hover { opacity: 0.7; }
+
+    .ranking-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--plomo);
+      line-height: 1;
+      width: 32px;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+
+    .ranking-item:first-child .ranking-num { color: var(--rojo); }
+
+    .ranking-texto {}
+    .ranking-cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 3px;
+    }
+
+    .ranking-titulo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--titanio);
+      line-height: 1.25;
+    }
+
+    /* Newsletter widget */
+    .newsletter-widget {
+      background: linear-gradient(135deg, var(--asfalto) 0%, var(--plomo) 100%);
+      border: 1px solid var(--plomo);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-widget::before {
+      content: 'M';
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 140px;
+      font-weight: 900;
+      color: rgba(232,0,29,0.06);
+      line-height: 1;
+    }
+
+    .newsletter-widget h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--blanco);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .newsletter-widget p {
+      font-size: 13px;
+      color: var(--gris-claro);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .newsletter-input {
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--plomo);
+      color: var(--blanco);
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-input:focus { border-color: var(--rojo); }
+    .newsletter-input::placeholder { color: var(--gris); }
+
+    .newsletter-btn {
+      width: 100%;
+      background: var(--rojo);
+      color: var(--blanco);
+      border: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 11px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .newsletter-btn:hover { background: #c8001a; }
+
+    /* ─── SECCIÓN COMPARATIVAS / ANÁLISIS ────────── */
+    .seccion-analisis { padding: 48px 0; }
+
+    .cards-analisis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--plomo);
+    }
+
+    .card-analisis {
+      background: var(--asfalto);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .card-analisis:hover .card-analisis-img { transform: scale(1.05); }
+    .card-analisis:hover .card-analisis-titulo { color: var(--rojo); }
+
+    .card-analisis-img-wrap {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .card-analisis-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .card-analisis-body { padding: 20px; }
+
+    .card-analisis-tipo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gris);
+      border: 1px solid var(--plomo);
+      padding: 2px 8px;
+      margin-bottom: 10px;
+    }
+
+    .card-analisis-titulo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: var(--blanco);
+      transition: color 0.2s;
+      margin-bottom: 8px;
+    }
+
+    .card-analisis-excerpt {
+      font-size: 13px;
+      color: var(--gris-claro);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .card-analisis-stats {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--plomo);
+      padding-top: 14px;
+    }
+
+    .stat {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid var(--plomo);
+    }
+    .stat:last-child { border-right: none; }
+
+    .stat-valor {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--rojo);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--gris);
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* ─── MARCAS ─────────────────────────────────── */
+    .seccion-marcas {
+      background: var(--asfalto);
+      border-top: 1px solid var(--plomo);
+      border-bottom: 1px solid var(--plomo);
+      padding: 32px 0;
+      margin-bottom: 48px;
+    }
+
+    .marcas-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .marca-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .marca-item:hover { opacity: 1; }
+
+    .marca-logo {
+      width: 48px; height: 48px;
+      background: var(--plomo);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--blanco);
+      letter-spacing: 0.05em;
+    }
+
+    .marca-nombre {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gris-claro);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      background: var(--asfalto);
+      border-top: 2px solid var(--rojo);
+      padding: 48px 0 24px;
+      margin-top: 48px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px 40px;
+      border-bottom: 1px solid var(--plomo);
+    }
+
+    .footer-brand .logo { font-size: 24px; margin-bottom: 12px; display: block; }
+
+    .footer-desc {
+      font-size: 13px;
+      color: var(--gris);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-social { display: flex; gap: 8px; }
+
+    .social-btn {
+      width: 32px; height: 32px;
+      background: var(--plomo);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gris-claro);
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Barlow Condensed', sans-serif;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: var(--rojo); color: var(--blanco); }
+
+    .footer-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .footer-col ul li a {
+      font-size: 13px;
+      color: var(--gris-claro);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-col ul li a:hover { color: var(--blanco); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--gris);
+    }
+
+    .footer-bottom a { color: var(--gris); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--rojo); }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 900px) {
+      .top-bar, .nav-main { padding: 6px 20px; }
+      .hero-content { padding: 0 20px 32px; }
+      .hero h1 { font-size: 40px; }
+      .hero-side { display: none; }
+      .main-container { padding: 0 20px; }
+      .grid-noticias { grid-template-columns: 1fr 1fr; }
+      .noticia-card.grande { grid-row: auto; grid-column: 1 / -1; }
+      .noticia-card.grande .noticia-img-wrap { height: 240px; }
+      .dos-columnas { grid-template-columns: 1fr; }
+      .cards-analisis { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .marcas-grid { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header>
+    <div class="top-bar">
+      <div class="top-bar-links">
+        <a href="#">Lunes, 29 de junio de 2026</a>
+        <a href="#">Edición España</a>
+      </div>
+      <div class="top-bar-links">
+        <a href="#">Newsletter</a>
+        <a href="#">Podcast</a>
+        <a href="#">Vídeos</a>
+        <a href="#">Suscribirse</a>
+      </div>
+    </div>
+
+    <div class="nav-main">
+      <a href="#" class="logo">
+        <div class="logo-dash"></div>
+        MOTOR<span>DIARIO</span>
+      </a>
+      <nav>
+        <a href="#" class="active">Portada</a>
+        <a href="#">Eléctricos</a>
+        <a href="#">F1 & Deportivos</a>
+        <a href="#">Comparativas</a>
+        <a href="#">Pruebas</a>
+        <a href="#">Industria</a>
+        <a href="#">Clásicos</a>
+        <a href="#">Tecnología</a>
+      </nav>
+      <button class="nav-search" aria-label="Buscar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-label">Última hora</div>
+    <div class="ticker-track">
+      <div class="ticker-item">Ferrari SF-26 domina los primeros libres en Silverstone</div>
+      <div class="ticker-item">Tesla Model Y Juniper logra récord de ventas en Europa con 48.000 unidades</div>
+      <div class="ticker-item">Volkswagen anuncia inversión de 15.000M€ en fábricas de baterías</div>
+      <div class="ticker-item">Porsche 911 Carrera GTS 2026: primeras imágenes filtradas</div>
+      <div class="ticker-item">SEAT Tarraco eléctrico llegará al mercado en el primer trimestre de 2027</div>
+      <div class="ticker-item">Nuevo BMW Serie 3: precios desde 44.900€ en España</div>
+      <div class="ticker-item">Max Verstappen encabeza el campeonato con 47 puntos de ventaja</div>
+      <div class="ticker-item">Mercedes-Benz cierra su planta de Sindelfingen para reconversión eléctrica</div>
+      <!-- Duplicado para loop -->
+      <div class="ticker-item">Ferrari SF-26 domina los primeros libres en Silverstone</div>
+      <div class="ticker-item">Tesla Model Y Juniper logra récord de ventas en Europa con 48.000 unidades</div>
+      <div class="ticker-item">Volkswagen anuncia inversión de 15.000M€ en fábricas de baterías</div>
+      <div class="ticker-item">Porsche 911 Carrera GTS 2026: primeras imágenes filtradas</div>
+      <div class="ticker-item">SEAT Tarraco eléctrico llegará al mercado en el primer trimestre de 2027</div>
+      <div class="ticker-item">Nuevo BMW Serie 3: precios desde 44.900€ en España</div>
+      <div class="ticker-item">Max Verstappen encabeza el campeonato con 47 puntos de ventaja</div>
+      <div class="ticker-item">Mercedes-Benz cierra su planta de Sindelfingen para reconversión eléctrica</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-label">Exclusiva</div>
+      <h1>El <em>nuevo</em> Porsche<br>911 Carrera GT3</h1>
+      <p>La evolución definitiva del deportivo más puro de Stuttgart llega con 560 CV, aerodinámica activa de competición y un motor de atmosférico de 4.0 litros capaz de girar a 9.200 rpm.</p>
+      <div class="hero-meta">
+        <div class="hero-autor">
+          <div class="hero-autor-avatar">JR</div>
+          <span>Javier Ruiz</span>
+        </div>
+        <div class="hero-sep"></div>
+        <span>Hace 2 horas</span>
+        <div class="hero-sep"></div>
+        <div class="hero-minilectura">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>8 min de lectura</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="hero-side-titulo">Lo más leído hoy</div>
+      <div class="hero-side-item">
+        <div class="hero-side-num">01</div>
+        <div>
+          <div class="hero-side-text">Tesla pierde terreno frente al BYD Seal en el mercado europeo</div>
+          <div class="hero-side-cat">Eléctricos · 12K lecturas</div>
+        </div>
+      </div>
+      <div class="hero-side-item">
+        <div class="hero-side-num">02</div>
+        <div>
+          <div class="hero-side-text">Comparativa: ¿Qué SUV compacto conviene más en 2026?</div>
+          <div class="hero-side-cat">Comparativas · 9.8K lecturas</div>
+        </div>
+      </div>
+      <div class="hero-side-item">
+        <div class="hero-side-num">03</div>
+        <div>
+          <div class="hero-side-text">Verstappen arrasa en Canadá y suma su victoria número 60</div>
+          <div class="hero-side-cat">F1 · 7.2K lecturas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTADA NOTICIAS -->
+  <div class="main-container">
+    <div class="section-header">
+      <h2>Portada</h2>
+      <div class="section-header-line"></div>
+      <a href="#">Ver todas →</a>
+    </div>
+
+    <div class="grid-noticias">
+      <!-- Noticia grande -->
+      <div class="noticia-card grande">
+        <div class="noticia-img-wrap">
+          <span class="noticia-cat">Eléctricos</span>
+          <img class="noticia-img" src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80" alt="Tesla">
+        </div>
+        <div class="noticia-body">
+          <h3 class="noticia-titulo">El BYD Seagull llega a España: el coche eléctrico más barato del mercado a menos de 15.000€</h3>
+          <p class="noticia-excerpt">La marca china rompe todas las barreras de precio con un utilitario eléctrico que promete 405 km de autonomía y garantía de 8 años en la batería. ¿Puede frenar al mercado europeo?</p>
+          <div class="noticia-footer">
+            <span class="autor">Carlos Méndez</span>
+            <span class="sep"></span>
+            <span>Hace 1 hora</span>
+            <span class="sep"></span>
+            <span>5 min</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia pequeña 1 -->
+      <div class="noticia-card">
+        <div class="noticia-img-wrap">
+          <span class="noticia-cat">F1</span>
+          <img class="noticia-img" src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=600&q=80" alt="F1">
+        </div>
+        <div class="noticia-body">
+          <h3 class="noticia-titulo">Ferrari recupera el liderato en constructores tras Silverstone</h3>
+          <p class="noticia-excerpt">Sainz y Leclerc cierran un doblete histórico en el circuito británico.</p>
+          <div class="noticia-footer">
+            <span class="autor">A. García</span>
+            <span class="sep"></span>
+            <span>3h</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia pequeña 2 -->
+      <div class="noticia-card">
+        <div class="noticia-img-wrap">
+          <span class="noticia-cat">Industria</span>
+          <img class="noticia-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Industria">
+        </div>
+        <div class="noticia-body">
+          <h3 class="noticia-titulo">STELLANTIS recorta producción un 18% y cierra plantas en Italia</h3>
+          <p class="noticia-excerpt">La multinacional franco-italiana ajusta su capacidad ante la caída de demanda.</p>
+          <div class="noticia-footer">
+            <span class="autor">M. Torres</span>
+            <span class="sep"></span>
+            <span>5h</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia pequeña 3 -->
+      <div class="noticia-card">
+        <div class="noticia-img-wrap">
+          <span class="noticia-cat">Prueba</span>
+          <img class="noticia-img" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&q=80" alt="BMW">
+        </div>
+        <div class="noticia-body">
+          <h3 class="noticia-titulo">Prueba BMW M5 Touring: la berlina familiar más rápida del planeta</h3>
+          <p class="noticia-excerpt">727 CV en un familiar con espacio para cinco y el maletero lleno.</p>
+          <div class="noticia-footer">
+            <span class="autor">P. Navas</span>
+            <span class="sep"></span>
+            <span>6h</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia pequeña 4 -->
+      <div class="noticia-card">
+        <div class="noticia-img-wrap">
+          <span class="noticia-cat">Tecnología</span>
+          <img class="noticia-img" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600&q=80" alt="Auto">
+        </div>
+        <div class="noticia-body">
+          <h3 class="noticia-titulo">Conducción autónoma nivel 3: estos son los coches que ya pueden usarla en España</h3>
+          <p class="noticia-excerpt">La DGT actualiza la normativa y permite el nivel 3 en autovías a partir de julio.</p>
+          <div class="noticia-footer">
+            <span class="autor">I. Blanco</span>
+            <span class="sep"></span>
+            <span>8h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOS COLUMNAS -->
+    <div class="dos-columnas">
+      <!-- Lista noticias -->
+      <div>
+        <div class="section-header">
+          <h2>Últimas noticias</h2>
+          <div class="section-header-line"></div>
+          <a href="#">Todas →</a>
+        </div>
+
+        <div class="lista-noticias">
+          <div class="lista-item">
+            <div class="lista-img-wrap">
+              <img class="lista-img" src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=300&q=80" alt="">
+            </div>
+            <div>
+              <div class="lista-cat">Clásicos</div>
+              <div class="lista-titulo">El Ferrari 250 GTO más caro del mundo sale a subasta por 80 millones</div>
+              <div class="lista-meta"><span>Antonio Vega</span><span>·</span><span>Hace 30 min</span></div>
+            </div>
+          </div>
+          <div class="lista-item">
+            <div class="lista-img-wrap">
+              <img class="lista-img" src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=300&q=80" alt="">
+            </div>
+            <div>
+              <div class="lista-cat">Eléctricos</div>
+              <div class="lista-titulo">Volkswagen ID.7 GTX: la berlina eléctrica deportiva que amenaza al Polestar 2</div>
+              <div class="lista-meta"><span>Sara Molina</span><span>·</span><span>Hace 1h 20min</span></div>
+            </div>
+          </div>
+          <div class="lista-item">
+            <div class="lista-img-wrap">
+              <img class="lista-img" src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=300&q=80" alt="">
+            </div>
+            <div>
+              <div class="lista-cat">Seguridad</div>
+              <div class="lista-titulo">Euro NCAP: los 5 coches más seguros de 2026 y los que suspenden</div>
+              <div class="lista-meta"><span>Luis Fdez.</span><span>·</span><span>Hace 2h</span></div>
+            </div>
+          </div>
+          <div class="lista-item">
+            <div class="lista-img-wrap">
+              <img class="lista-img" src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=300&q=80" alt="">
+            </div>
+            <div>
+              <div class="lista-cat">Deportivos</div>
+              <div class="lista-titulo">Aston Martin Valhalla: primeras pruebas del hypercar híbrido con 1.000 CV</div>
+              <div class="lista-meta"><span>R. Castillo</span><span>·</span><span>Hace 3h</span></div>
+            </div>
+          </div>
+          <div class="lista-item">
+            <div class="lista-img-wrap">
+              <img class="lista-img" src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=300&q=80" alt="">
+            </div>
+            <div>
+              <div class="lista-cat">Mercado</div>
+              <div class="lista-titulo">Las matriculaciones caen un 8% en junio pero los eléctricos crecen un 34%</div>
+              <div class="lista-meta"><span>N. Pastor</span><span>·</span><span>Hace 4h</span></div>
+            </div>
+          </div>
+          <div class="lista-item">
+            <div class="lista-img-wrap">
+              <img class="lista-img" src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=300&q=80" alt="">
+            </div>
+            <div>
+              <div class="lista-cat">Movilidad</div>
+              <div class="lista-titulo">España tendrá 100.000 puntos de recarga para 2028 según el nuevo PNIEC</div>
+              <div class="lista-meta"><span>E. Romero</span><span>·</span><span>Hace 5h</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- Ranking -->
+        <div class="sidebar-widget">
+          <div class="widget-title">Lo más leído esta semana</div>
+          <div class="ranking-item">
+            <div class="ranking-num">1</div>
+            <div class="ranking-texto">
+              <div class="ranking-cat">Eléctricos</div>
+              <div class="ranking-titulo">Guía completa: cómo aprovechar las ayudas del Plan MOVES III en 2026</div>
+            </div>
+          </div>
+          <div class="ranking-item">
+            <div class="ranking-num">2</div>
+            <div class="ranking-texto">
+              <div class="ranking-cat">F1</div>
+              <div class="ranking-titulo">Hamilton vs Leclerc: el duelo que definirá el campeonato de 2026</div>
+            </div>
+          </div>
+          <div class="ranking-item">
+            <div class="ranking-num">3</div>
+            <div class="ranking-texto">
+              <div class="ranking-cat">Comparativa</div>
+              <div class="ranking-titulo">Dacia Duster vs Renault Captur vs Nissan Qashqai: ¿cuál comprar?</div>
+            </div>
+          </div>
+          <div class="ranking-item">
+            <div class="ranking-num">4</div>
+            <div class="ranking-texto">
+              <div class="ranking-cat">Prueba</div>
+              <div class="ranking-titulo">Toyota GR86 2026: el deportivo asequible que sigue siendo el más divertido</div>
+            </div>
+          </div>
+          <div class="ranking-item">
+            <div class="ranking-num">5</div>
+            <div class="ranking-texto">
+              <div class="ranking-cat">Industria</div>
+              <div class="ranking-titulo">El fin del coche de gasolina: lo que realmente cambiará en 2035</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter-widget">
+          <h3>El briefing del motor</h3>
+          <p>Cada mañana, las 5 noticias que mueven el mundo de la automoción. Sin ruido, sin relleno.</p>
+          <input class="newsletter-input" type="email" placeholder="tu@email.com">
+          <button class="newsletter-btn">Suscribirme gratis</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ANÁLISIS Y COMPARATIVAS -->
+    <div class="seccion-analisis">
+      <div class="section-header">
+        <h2>Pruebas & Comparativas</h2>
+        <div class="section-header-line"></div>
+        <a href="#">Ver todas →</a>
+      </div>
+
+      <div class="cards-analisis">
+        <div class="card-analisis">
+          <div class="card-analisis-img-wrap">
+            <img class="card-analisis-img" src="https://images.unsplash.com/photo-1563720223523-c2ac7fe52f14?w=600&q=80" alt="Porsche">
+          </div>
+          <div class="card-analisis-body">
+            <div class="card-analisis-tipo">Prueba a fondo</div>
+            <h3 class="card-analisis-titulo">Porsche Taycan Turbo GT: la vuelta rápida en Nürburgring que nadie esperaba</h3>
+            <p class="card-analisis-excerpt">1.092 CV y un récord absoluto en el Infierno Verde que redefine lo posible para un coche de producción.</p>
+            <div class="card-analisis-stats">
+              <div class="stat">
+                <div class="stat-valor">1.092</div>
+                <div class="stat-label">CV</div>
+              </div>
+              <div class="stat">
+                <div class="stat-valor">2,4s</div>
+                <div class="stat-label">0-100</div>
+              </div>
+              <div class="stat">
+                <div class="stat-valor">260</div>
+                <div class="stat-label">km/h top</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-analisis">
+          <div class="card-analisis-img-wrap">
+            <img class="card-analisis-img" src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=600&q=80" alt="SUV">
+          </div>
+          <div class="card-analisis-body">
+            <div class="card-analisis-tipo">Comparativa</div>
+            <h3 class="card-analisis-titulo">Hyundai Ioniq 6 vs Tesla Model 3: batalla entre los eléctricos más eficientes</h3>
+            <p class="card-analisis-excerpt">Dos sedanes eléctricos con aerodinámica de récord que pelean por el mismo comprador exigente.</p>
+            <div class="card-analisis-stats">
+              <div class="stat">
+                <div class="stat-valor">614</div>
+                <div class="stat-label">km WLTP</div>
+              </div>
+              <div class="stat">
+                <div class="stat-valor">13,9</div>
+                <div class="stat-label">kWh/100km</div>
+              </div>
+              <div class="stat">
+                <div class="stat-valor">240</div>
+                <div class="stat-label">kW recarga</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-analisis">
+          <div class="card-analisis-img-wrap">
+            <img class="card-analisis-img" src="https://images.unsplash.com/photo-1607853202273-232359e843da?w=600&q=80" alt="Clásico">
+          </div>
+          <div class="card-analisis-body">
+            <div class="card-analisis-tipo">Especial</div>
+            <h3 class="card-analisis-titulo">Los 10 coches clásicos españoles que más han subido de valor en 2025</h3>
+            <p class="card-analisis-excerpt">Del SEAT 600 al Pegaso Z102, el mercado de clásicos nacionales vive su época dorada.</p>
+            <div class="card-analisis-stats">
+              <div class="stat">
+                <div class="stat-valor">+67%</div>
+                <div class="stat-label">revalorización</div>
+              </div>
+              <div class="stat">
+                <div class="stat-valor">10</div>
+                <div class="stat-label">modelos</div>
+              </div>
+              <div class="stat">
+                <div class="stat-valor">1950s</div>
+                <div class="stat-label">origen</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARCAS -->
+  <section class="seccion-marcas">
+    <div class="main-container">
+      <div class="marcas-grid">
+        <div class="marca-item"><div class="marca-logo">BMW</div><div class="marca-nombre">BMW</div></div>
+        <div class="marca-item"><div class="marca-logo">MB</div><div class="marca-nombre">Mercedes</div></div>
+        <div class="marca-item"><div class="marca-logo">AUD</div><div class="marca-nombre">Audi</div></div>
+        <div class="marca-item"><div class="marca-logo">VW</div><div class="marca-nombre">Volkswagen</div></div>
+        <div class="marca-item"><div class="marca-logo">POR</div><div class="marca-nombre">Porsche</div></div>
+        <div class="marca-item"><div class="marca-logo">FER</div><div class="marca-nombre">Ferrari</div></div>
+        <div class="marca-item"><div class="marca-logo">LAM</div><div class="marca-nombre">Lamborghini</div></div>
+        <div class="marca-item"><div class="marca-logo">TS</div><div class="marca-nombre">Tesla</div></div>
+        <div class="marca-item"><div class="marca-logo">TOY</div><div class="marca-nombre">Toyota</div></div>
+        <div class="marca-item"><div class="marca-logo">REN</div><div class="marca-nombre">Renault</div></div>
+        <div class="marca-item"><div class="marca-logo">SEA</div><div class="marca-nombre">SEAT</div></div>
+        <div class="marca-item"><div class="marca-logo">BYD</div><div class="marca-nombre">BYD</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><div class="logo-dash"></div>MOTOR<span>DIARIO</span></a>
+        <p class="footer-desc">El diario de referencia de la automoción en España. Noticias, pruebas, comparativas y análisis del sector del motor desde 2018.</p>
+        <div class="footer-social">
+          <a class="social-btn" href="#">X</a>
+          <a class="social-btn" href="#">IG</a>
+          <a class="social-btn" href="#">YT</a>
+          <a class="social-btn" href="#">TK</a>
+          <a class="social-btn" href="#">FB</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="#">Eléctricos</a></li>
+          <li><a href="#">F1 & Competición</a></li>
+          <li><a href="#">Comparativas</a></li>
+          <li><a href="#">Pruebas en carretera</a></li>
+          <li><a href="#">Industria</a></li>
+          <li><a href="#">Coches clásicos</a></li>
+          <li><a href="#">Tecnología</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Motor Diario</h4>
+        <ul>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">El equipo</a></li>
+          <li><a href="#">Podcast</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Publicidad</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Aviso legal</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Accesibilidad</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Motor Diario. Todos los derechos reservados.</span>
+      <span>Hecho con pasión por el motor · Madrid, España</span>
+    </div>
+  </footer>
+
+</body>
+</html>
